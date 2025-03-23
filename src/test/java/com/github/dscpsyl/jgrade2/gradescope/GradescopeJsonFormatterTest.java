@@ -1,5 +1,6 @@
 package com.github.dscpsyl.jgrade2.gradescope;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,7 +12,9 @@ import com.github.dscpsyl.jgrade2.gradedtest.GradedTestResult;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class GradescopeJsonFormatterTest {
 
@@ -53,6 +56,43 @@ public class GradescopeJsonFormatterTest {
     public void validIfTests() throws JSONException {
         grader.addGradedTestResult(new GradedTestResult("", "", 20.0, "visible"));
         assertValidJson(unit.format(grader));
+    }
+
+    @Test
+    public void validIfZeroPointTestExists() throws JSONException {
+        grader.addGradedTestResult(new GradedTestResult("", "", 0.0, "visible"));
+        assertValidJson(unit.format(grader));
+    }
+
+    @Test
+    public void validIfZeroPointTestMarkedFailed() throws JSONException {
+        GradedTestResult result = new GradedTestResult("", "", 0.0, "visible");
+        result.setPassed(false);
+        grader.addGradedTestResult(result);
+        assertValidJson(unit.format(grader));
+    }
+
+    /**
+     * A test that is explicitly marked as failed should put a status in the output JSON.
+     * This prevent Gradescope from marking a failing zero-point test as passing (because the
+     * points earned equal the max points).
+     * @throws JSONException
+     */
+    @Test
+    public void zeroPointFailedTestGeneratesStatus() throws JSONException {
+        GradedTestResult result = new GradedTestResult("", "", 0.0, "visible");
+        result.setPassed(false);
+        grader.addGradedTestResult(result);
+
+        String jsonString = unit.format(grader);
+
+        JSONObject obj = new JSONObject(jsonString);
+        assertNotNull(obj);
+        JSONArray testArray = obj.getJSONArray("tests");
+        assertNotNull(testArray);
+        assertEquals(1, testArray.length());
+        JSONObject testObject = testArray.getJSONObject(0);
+        assertEquals("failed", testObject.getString("status"));
     }
 
     @Test

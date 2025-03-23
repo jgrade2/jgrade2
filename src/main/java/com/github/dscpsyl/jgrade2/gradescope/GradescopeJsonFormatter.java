@@ -31,6 +31,8 @@ public class GradescopeJsonFormatter implements OutputFormatter {
     private static final String NUMBER = "number";
     private static final String OUTPUT = "output";
     private static final String VISIBILITY = "visibility";
+    private static final String STATUS = "status";
+    private static final String FAILED = "failed";
 
     private JSONObject json;
     private int prettyPrint;
@@ -126,13 +128,17 @@ public class GradescopeJsonFormatter implements OutputFormatter {
      */
     private JSONObject assemble(GradedTestResult r) {
         try {
-            return new JSONObject()
+            JSONObject rval =  new JSONObject()
                     .put(NAME, r.getName())
                     .put(SCORE, r.getScore())
                     .put(MAX_SCORE, r.getPoints())
                     .put(NUMBER, r.getNumber())
                     .put(OUTPUT, r.getOutput())
                     .put(VISIBILITY, r.getVisibility());
+            if (!r.passed()) {
+                rval.put(STATUS, FAILED);
+            }
+            return rval;
         } catch (JSONException e) {
             throw new InternalError(e);
         }
