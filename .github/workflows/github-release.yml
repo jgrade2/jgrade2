@@ -3,9 +3,6 @@ name: "Compile and Create new release on Github"
 on:
   workflow_dispatch:
   push:
-    branches:
-      - master
-      - main
     tags:
       - v*
 
@@ -13,6 +10,7 @@ jobs:
   upload-release:
     name: Build and Upload Release
     runs-on: ubuntu-latest
+    if: contains(${{ github.event.base_ref }}, 'main')
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3.5.2
@@ -31,3 +29,39 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
+
+
+
+#! Another way to check for branch in case we ever need it
+# https://stackoverflow.com/a/77727776
+#---------------------------------------------------------------------
+# jobs:
+#   # @see https://stackoverflow.com/a/72959712/8179249
+#   check-current-branch:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       branch: ${{ steps.check_step.outputs.branch }}
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+
+#       - name: Get current branch
+#         id: check_step
+#         # 1. Get the list of branches ref where this tag exists
+#         # 2. Remove 'origin/' from that result
+#         # 3. Put that string in output
+#         # => We can now use function 'contains(list, item)''
+#         run: |
+#           raw=$(git branch -r --contains ${{ github.ref }})
+#           branch="$(echo ${raw//origin\//} | tr -d '\n')"
+#           echo "{name}=branch" >> $GITHUB_OUTPUT
+#           echo "Branches where this tag exists : $branch."
+
+#   build-and-push-image:
+#     runs-on: ubuntu-latest
+#     # Wait for check step to finish
+#     needs: check-current-branch
+#     # only run if tag is present on branch 'main'
+#     if: contains(${{ needs.check.outputs.branch }}, 'main')

@@ -40,20 +40,20 @@
 
     <name>jgrade2</name>
     <inceptionYear>2023</inceptionYear>
-    <url>https://github.com/dscpsyl/jgrade2</url>
-    <description>An update to the original jGrade (based on tkutcher/jgrade) for Java 21 and jUnit 5</description>
+    <url>https://github.com/jgrade2/jgrade2</url>
+    <description>An update to the original jGrade (based on tkutcher/jgrade) for modern Java and JUnit versions</description>
     <!-- Required for Maven Central-->
     <scm>
-        <connection>scm:git:https://github.com/dscpsyl/jgrade2.git</connection>
-        <developerConnection>scm:git:https://github.com/dscpsyl/jgrade2.git</developerConnection>
-        <url>https://github.com/dscpsyl/jgrade2.git</url>
+        <connection>scm:git:https://github.com/jgrade2/jgrade2.git</connection>
+        <developerConnection>scm:git:https://github.com/jgrade2/jgrade2.git</developerConnection>
+        <url>https://github.com/jgrade2/jgrade2.git</url>
         <tag>HEAD</tag>
     </scm>
 
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>https://github.com/dscpsyl/jgrade2/blob/dev/LICENSE.md</url>
+            <url>https://github.com/jgrade2/jgrade2/blob/dev/LICENSE.md</url>
         </license>
     </licenses>
 

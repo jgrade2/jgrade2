@@ -4,12 +4,13 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
       - main
 
 jobs:
   publish-javadoc:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Deploy JavaDoc 🚀
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
