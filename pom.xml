@@ -33,7 +33,7 @@
         </developer>
     </developers>
 
-    <groupId>io.github.dscpsyl</groupId>
+    <groupId>io.github.jgrade2</groupId>
     <artifactId>jgrade2</artifactId>
     <packaging>jar</packaging>
     <version>2.0.0-a2</version> <!-- NOTE - If major/minor version changes, update project.finalName in properties -->
@@ -185,7 +185,7 @@
                                     <appendAssemblyId>false</appendAssemblyId>
                                     <archive>
                                         <manifest>
-                                            <mainClass>com.github.dscpsyl.jgrade2.JGrade2</mainClass>
+                                            <mainClass>com.github.jgrade2.jgrade2.JGrade2</mainClass>
                                         </manifest>
                                     </archive>
                                 </configuration>
@@ -217,13 +217,13 @@
                         <configuration>
                             <excludes>
                                 <!-- Hard to test for specific failures due to inability to create a TestIdentifier manually-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/gradedtest/GradedTestListener.class</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/gradedtest/GradedTestListener.class</exclude>
                                 <!-- Nothing to do-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/**/DefaultGraderStrategy.*</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/**/DefaultGraderStrategy.*</exclude>
                                 <!-- Mostly private classes and cannot be unit tested-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/**/*CheckstyleGrader.*</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/**/*CheckstyleGrader.*</exclude>
                                 <!-- CLI interface and difficult to unit test-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/**/*CLITester.*</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/**/*CLITester.*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
@@ -305,22 +305,22 @@
                             </historyOutputFile>
                             <verbose>true</verbose>
                             <targetClasses>
-                                <param>com.github.dscpsyl.jgrade2.*</param>
+                                <param>com.github.jgrade2.jgrade2.*</param>
                             </targetClasses>
                             <targetTests>
-                                <param>com.github.dscpsyl.jgrade2.*</param>
+                                <param>com.github.jgrade2.jgrade2.*</param>
                             </targetTests>
                             <excludedClasses>
                                 <!--See reason from jacoco test coverage exclusion-->
-                                <param>com.github.dscpsyl.jgrade2.CheckstyleGrader</param>
+                                <param>com.github.jgrade2.jgrade2.CheckstyleGrader</param>
                                 <!--See reason from jacoco test coverage exclusion-->
-                                <param>com.github.dscpsyl.jgrade2.CLITester*</param>
+                                <param>com.github.jgrade2.jgrade2.CLITester*</param>
                             </excludedClasses>
                             <excludedTestClasses></excludedTestClasses>
                             <excludedMethods>
                                 <param>flush_and_close_noPitest</param>
                                 <!--Private constructor-->
-                                <param>com.github.dscpsyl.jgrade2.ReflectGrade.ReflectGrade</param>
+                                <param>com.github.jgrade2.jgrade2.ReflectGrade.ReflectGrade</param>
                             </excludedMethods>
                             <outputFormats>
                                 <outputFormat>HTML</outputFormat>
@@ -393,7 +393,7 @@
                                     <appendAssemblyId>false</appendAssemblyId>
                                     <archive>
                                         <manifest>
-                                            <mainClass>com.github.dscpsyl.jgrade2.JGrade2</mainClass>
+                                            <mainClass>com.github.jgrade2.jgrade2.JGrade2</mainClass>
                                         </manifest>
                                     </archive>
                                 </configuration>
@@ -491,7 +491,7 @@
                                     <workDirectory>${gh.release.dir}</workDirectory>
                                     <archive>
                                         <manifest>
-                                            <mainClass>com.github.dscpsyl.jgrade2.JGrade2</mainClass>
+                                            <mainClass>com.github.jgrade2.jgrade2.JGrade2</mainClass>
                                         </manifest>
                                     </archive>
                                 </configuration>
