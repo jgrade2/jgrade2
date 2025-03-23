@@ -1,7 +1,5 @@
 # jgrade2
 
-Future home of https://github.com/dscpsyl/jgrade2 for when we publish to Sonatype.
-
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
@@ -17,7 +15,6 @@ Future home of https://github.com/dscpsyl/jgrade2 for when we publish to Sonatyp
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- Project Overview -->
 
@@ -26,49 +23,14 @@ Future home of https://github.com/dscpsyl/jgrade2 for when we publish to Sonatyp
   <p align="center">
     An annotation library used to help autograde student assignments in Java for Gradescope.
     <br />
-    <a href="https://dscpsyl.github.io/jgrade2/javadoc/"><strong>Explore the docs »</strong></a>
+    <a href="https://jgrade2.github.io/jgrade2/javadoc/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/dscpsyl/jgrade2/issues">Report Bug</a>
+    <a href="https://github.com/jgrade2/jgrade2/issues">Report Bug</a>
     ·
-    <a href="https://github.com/dscpsyl/jgrade2/issues">Request Feature</a>
+    <a href="https://github.com/jgrade2/jgrade2/issues">Request Feature</a>
   </p>
 </div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <ul>
-      <li><a href="#test-writting-and-grading">Test Writting and Grading</a></li>
-      <ul>
-        <li><a href="#tests">Tests</a></li>
-        <li><a href="#grading">Grading</a></li>
-      </ul>
-      <li><a href="#gradescope-setup">Gradescope Setup</a></li>
-      <ul>
-        <li><a href="#to-build-the-autograder">To build the Autograder</a></li>
-      </ul>
-    </ul>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -252,6 +214,10 @@ The `lib/` folder contains all jars and library files needed to run your test - 
 
  1. Run `./mvnw clean package` to build the jGrade2 jar
  2. Copy the jGrade2 jar to the `lib/` folder
+    - Example:
+    ```
+    cp target/jgrade2-2.0.0-a2-all.jar examples/gradescope/lib
+    ```
  3. Run either `./make_autograder.sh` or `make autograder` which will place it in the `zips/` folder.
  4. Upload the autograder to Gradescope.
 
@@ -286,6 +252,11 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Contributors
+
+<a href="https://github.com/jgrade2/jgrade2/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jgrade2/jgrade2" />
+</a>
 
 
 <!-- LICENSE -->
@@ -302,7 +273,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 * This is an update of the original [jGrade](https://github.com/tkutcher/jgrade).
 * Originally developed by [dscpsyl](https://github.com/dscpsyl) and directed by [pconrad](https://github.com/pconrad)
-* Maintained by the CMPSC 192 course staff and students at University of California, Santa Barbara
+  * Origional fork here: [dscpsyl/jGrade2](https://github.com/dscpsyl/jgrade2)
+* Currently maintained by the CMPSC 192 course staff and students at University of California, Santa Barbara
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -310,15 +282,15 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/dscpsyl/jgrade2.svg?style=for-the-badge
-[contributors-url]: https://github.com/dscpsyl/jgrade2/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/dscpsyl/jgrade2.svg?style=for-the-badge
-[forks-url]: https://github.com/dscpsyl/jgrade2/network/members
-[stars-shield]: https://img.shields.io/github/stars/dscpsyl/jgrade2.svg?style=for-the-badge
-[stars-url]: https://github.com/dscpsyl/jgrade2/stargazers
-[issues-shield]: https://img.shields.io/github/issues/dscpsyl/jgrade2.svg?style=for-the-badge
-[issues-url]: https://github.com/dscpsyl/jgrade2/issues
-[license-shield]: https://img.shields.io/github/license/dscpsyl/jgrade2.svg?style=for-the-badge
-[license-url]: https://github.com/dscpsyl/jgrade2/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/jgrade2/jgrade2.svg?style=for-the-badge
+[contributors-url]: https://github.com/jgrade2/jgrade2/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jgrade2/jgrade2.svg?style=for-the-badge
+[forks-url]: https://github.com/jgrade2/jgrade2/network/members
+[stars-shield]: https://img.shields.io/github/stars/jgrade2/jgrade2.svg?style=for-the-badge
+[stars-url]: https://github.com/jgrade2/jgrade2/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jgrade2/jgrade2.svg?style=for-the-badge
+[issues-url]: https://github.com/jgrade2/jgrade2/issues
+[license-shield]: https://img.shields.io/github/license/jgrade2/jgrade2.svg?style=for-the-badge
+[license-url]: https://github.com/jgrade2/jgrade2/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/davidjsim/
