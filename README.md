@@ -36,7 +36,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is an update to the original jGrade, now supporting Java17 and [JUnit5](https://junit.org/junit5/). This provides four 
+This is an update to the original jGrade, now supporting Java21 and [JUnit5](https://junit.org/junit5/). This provides four 
 annotations: `@Grade` (+ `@BeforeGrading` and `@AfterGrading`) and `@GradedTest`, each meant to help autograde 
 student assignments in Java for the Gradescope autograder. When correctly setup, instructors can 
 simply use JUnit5 to write tests for assignemnts. This library will automatically capture results, 
