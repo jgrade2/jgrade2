@@ -287,7 +287,6 @@ There are also a few notes in the `pom.xml` file that you should take note of.
 - `<developers>`: You can update the developers section to include yourself but no change is necessary. Just make sure it is reasonable.
 - `<groupId>`: This should be updated to match the *namespace* of your Sonatype account.
 - `<version>`: Update this to match the `CHANGELOG.md` file as well as the git tag of the release.
-- `<project.finalName>`: This should be updated to match the name and version of the jar file you want to publish. This is the name of the jar file that will be published to Maven Central.
 - `<java.target.version>`: This should be updated to match the version of Java you are using. This is used for the JavaDoc generation and many other items.
 - `<jreleaser.*>`: Any tags starting with `jreleaser` are configs that can be configured if needed.
 
