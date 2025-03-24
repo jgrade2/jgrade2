@@ -36,7 +36,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is an update to the original jGrade, now supporting Java17 and [JUnit5](https://junit.org/junit5/). This provides four 
+This is an update to the original jGrade, now supporting Java21 and [JUnit5](https://junit.org/junit5/). This provides four 
 annotations: `@Grade` (+ `@BeforeGrading` and `@AfterGrading`) and `@GradedTest`, each meant to help autograde 
 student assignments in Java for the Gradescope autograder. When correctly setup, instructors can 
 simply use JUnit5 to write tests for assignemnts. This library will automatically capture results, 
@@ -275,9 +275,9 @@ This workflow runs whenever a tag commit is pushed onto the `main` branch. It wi
 
 This workflow will run whenever a release is published on Github. It uitilizes [jReleaser](https://github.com/jreleaser/jreleaser) to deploy to Maven Central. There are a few secrets that need to be present in the repo for this to work. 
 
-- `JRELEASER_NEXUS2_USERNAME`: The variable name is legacy but it will work the same. This is the username of your [Sonatype](https://central.sonatype.com/) account.
-- `JRELEASER_NEXUS2_PASSWORD`: The variable name is legacy but it will work the same. The password of your [Sonatype](https://central.sonatype.com/) account.
-- `RELEASER_GPG_PASSPHRASE`: The passphrase of your GPG key. This is used to sign the release.
+- `JRELEASER_MAVENCENTRAL_USERNAME`: The username of your [Sonatype](https://central.sonatype.com/) account.
+- `JRELEASER_MAVENCENTRAL_TOKEN`: This is the User Token associated with the account in `JRELEASER_MAVENCENTRAL_USERNAME`.
+- `JRELEASER_GPG_PASSPHRASE`: The passphrase of your GPG key. This is used to sign the release.
 - `JRELEASER_GPG_SECRET_KEY`: The secret key of your GPG key. This is used to sign the release.
 - `JRELEASER_GPG_PUBLIC_KEY`: The public key of your GPG key. This is used to sign the release.
   
@@ -287,7 +287,6 @@ There are also a few notes in the `pom.xml` file that you should take note of.
 - `<developers>`: You can update the developers section to include yourself but no change is necessary. Just make sure it is reasonable.
 - `<groupId>`: This should be updated to match the *namespace* of your Sonatype account.
 - `<version>`: Update this to match the `CHANGELOG.md` file as well as the git tag of the release.
-- `<project.finalName>`: This should be updated to match the name and version of the jar file you want to publish. This is the name of the jar file that will be published to Maven Central.
 - `<java.target.version>`: This should be updated to match the version of Java you are using. This is used for the JavaDoc generation and many other items.
 - `<jreleaser.*>`: Any tags starting with `jreleaser` are configs that can be configured if needed.
 

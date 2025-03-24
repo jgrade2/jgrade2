@@ -44,7 +44,7 @@ import java.net.MalformedURLException;
  */
 public final class JGrade2 {
 
-    private static final String VERSION = "2.0.0-a2";
+    private static final String VERSION = "2.0.0-a3";
 
     private static final String CLASS_OPT = "classname";
     private static final String HELP_OPT = "help";
