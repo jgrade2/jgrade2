@@ -58,15 +58,15 @@ containing all the dependencies.
 
 There are two ways to install jGrade2.
 
-1. Install directly from GitHub [releases](https://github.com/dscpsyl/jgrade2/releases). You can download
+1. Install directly from GitHub [releases](https://github.com/jgrade2/jgrade2/releases). You can download
    either `jar` files or build the source code from scratch. If building from source, this project uses
    maven wrapper to build. Simply run `./mvnw clean package` to build the project. Two jar files will be
-   created, both reflected on the [releases](https://github.com/dscpsyl/jgrade2/releases) page.
+   created, both reflected on the [releases](https://github.com/jgrade2/jgrade2/releases) page.
 2. Add as a dependency directly from Maven Central.
 
 ```xml
 <dependency>
-  <groupId>io.github.dscpsyl</groupId>
+  <groupId>io.github.jgrade2</groupId>
   <artifactId>jgrade2</artifactId>
   <version>${jGrade2.version}</version>
 </dependency>
@@ -99,10 +99,10 @@ assignment on gradescope.
 ```java
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import com.github.dscpsyl.jgrade2.gradedtest.GradedTest;
+import com.github.jgrade2.jgrade2.gradedtest.GradedTest;
 
-import static com.github.dscpsyl.jgrade2.gradedtest.HIDDEN;
-import static com.github.dscpsyl.jgrade2.gradedtest.VISIBLE;
+import static com.github.jgrade2.jgrade2.gradedtest.HIDDEN;
+import static com.github.jgrade2.jgrade2.gradedtest.VISIBLE;
 
 public class ExampleTest {
     @Test
@@ -140,14 +140,14 @@ that should be considered for grading needs to be annotated with `@Grade`. The m
 also take in a single parameter of type `Grader`. 
 
 ```java
-import com.github.dscpsyl.jgrade2.Grader;
-import com.github.dscpsyl.jgrade2.GradedTestResult;
+import com.github.jgrade2.jgrade2.Grader;
+import com.github.jgrade2.jgrade2.GradedTestResult;
 
-import com.github.dscpsyl.jgrade2.Grade;
-import com.github.dscpsyl.jgrade2.AfterGrading;
-import com.github.dscpsyl.jgrade2.BeforeGrading;
+import com.github.jgrade2.jgrade2.Grade;
+import com.github.jgrade2.jgrade2.AfterGrading;
+import com.github.jgrade2.jgrade2.BeforeGrading;
 
-import static com.github.dscpsyl.jgrade2.gradedtest.HIDDEN;
+import static com.github.jgrade2.jgrade2.gradedtest.HIDDEN;
 
 public class ExampleGrading {
 
