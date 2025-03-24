@@ -1,7 +1,5 @@
 # jgrade2
 
-Future home of https://github.com/dscpsyl/jgrade2 for when we publish to Sonatype.
-
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
@@ -17,7 +15,6 @@ Future home of https://github.com/dscpsyl/jgrade2 for when we publish to Sonatyp
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- Project Overview -->
 
@@ -26,55 +23,20 @@ Future home of https://github.com/dscpsyl/jgrade2 for when we publish to Sonatyp
   <p align="center">
     An annotation library used to help autograde student assignments in Java for Gradescope.
     <br />
-    <a href="https://dscpsyl.github.io/jgrade2/javadoc/"><strong>Explore the docs »</strong></a>
+    <a href="https://jgrade2.github.io/jgrade2/javadoc/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/dscpsyl/jgrade2/issues">Report Bug</a>
+    <a href="https://github.com/jgrade2/jgrade2/issues">Report Bug</a>
     ·
-    <a href="https://github.com/dscpsyl/jgrade2/issues">Request Feature</a>
+    <a href="https://github.com/jgrade2/jgrade2/issues">Request Feature</a>
   </p>
 </div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <ul>
-      <li><a href="#test-writting-and-grading">Test Writting and Grading</a></li>
-      <ul>
-        <li><a href="#tests">Tests</a></li>
-        <li><a href="#grading">Grading</a></li>
-      </ul>
-      <li><a href="#gradescope-setup">Gradescope Setup</a></li>
-      <ul>
-        <li><a href="#to-build-the-autograder">To build the Autograder</a></li>
-      </ul>
-    </ul>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is an update to the original jGrade, now supporting Java17 and [JUnit5](https://junit.org/junit5/). This provides four 
+This is an update to the original jGrade, now supporting Java21 and [JUnit5](https://junit.org/junit5/). This provides four 
 annotations: `@Grade` (+ `@BeforeGrading` and `@AfterGrading`) and `@GradedTest`, each meant to help autograde 
 student assignments in Java for the Gradescope autograder. When correctly setup, instructors can 
 simply use JUnit5 to write tests for assignemnts. This library will automatically capture results, 
@@ -88,7 +50,7 @@ and output the correct json format for Gradescope to read.
 
 ### Prerequisites
 
-jGrade2 requires Java 17 and JUnit5. It is recommended to use Maven to manage dependencies. Additional 
+jGrade2 requires Java 21 and JUnit5. It is recommended to use Maven to manage dependencies. Additional 
 dependencies are listed in the `pom.xml` file. For the user's convenience, a `jar` file is provided
 containing all the dependencies.
 
@@ -252,6 +214,10 @@ The `lib/` folder contains all jars and library files needed to run your test - 
 
  1. Run `./mvnw clean package` to build the jGrade2 jar
  2. Copy the jGrade2 jar to the `lib/` folder
+    - Example:
+    ```
+    cp target/jgrade2-2.0.0-a2-all.jar examples/gradescope/lib
+    ```
  3. Run either `./make_autograder.sh` or `make autograder` which will place it in the `zips/` folder.
  4. Upload the autograder to Gradescope.
 
@@ -286,7 +252,43 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### Github Workflows
 
+The following are an overview of the workflows and how they are executed while working in this repository. Normal contributors can skip this section but any future maintainers should read this to fully understand the CI/CD process.
+
+#### Tests and Checks
+
+This workflow will run when a pull request is opened and when a push is made to `dev`. It will run all unit tests, Jacoco coverage tests, Pitest mutations, and checkstyle. If any of these fail, the workflow will not run successfully. You can adjust the config of all of these in their related java config files as they are all native java extensions.
+
+#### JavaDoc
+
+This workflow runs whenever a push is made to the `main` branch. It will build the javadoc and push it to the `javadoc` branch. This will update the javadoc on the [github pages](https://jgrade2.github.io/jgrade2/javadoc/). It uitilizes the native javadoc extension.
+
+#### Github Release
+
+This workflow runs whenever a tag commit is pushed onto the `main` branch. It will create and publish a new release based on the compiled jar file. This is based on the `gh_release` profile in `pom.xml`. Please see the `pom.xml` file for more information.
+
+*A note on this specific workflow:* There is no currently known way of easily getting both the ref tag and the ref branch name in a single workflow from the Github context. Depending on how the worflow is triggered, either the tag or the branch name will be used. Thus, the way branch and tag information is checked could break or be irrevelant at any time.
+
+
+#### Maven Release
+
+This workflow will run whenever a release is published on Github. It uitilizes [jReleaser](https://github.com/jreleaser/jreleaser) to deploy to Maven Central. There are a few secrets that need to be present in the repo for this to work. 
+
+- `JRELEASER_MAVENCENTRAL_USERNAME`: The username of your [Sonatype](https://central.sonatype.com/) account.
+- `JRELEASER_MAVENCENTRAL_TOKEN`: This is the User Token associated with the account in `JRELEASER_MAVENCENTRAL_USERNAME`.
+- `JRELEASER_GPG_PASSPHRASE`: The passphrase of your GPG key. This is used to sign the release.
+- `JRELEASER_GPG_SECRET_KEY`: The secret key of your GPG key. This is used to sign the release.
+- `JRELEASER_GPG_PUBLIC_KEY`: The public key of your GPG key. This is used to sign the release.
+  
+*A note on the GPG keys:* You must upload your public key server that sonatype supports. Learn more about GPG key usage with Maven Central [here](https://central.sonatype.org/publish/requirements/gpg/).
+
+There are also a few notes in the `pom.xml` file that you should take note of. 
+- `<developers>`: You can update the developers section to include yourself but no change is necessary. Just make sure it is reasonable.
+- `<groupId>`: This should be updated to match the *namespace* of your Sonatype account.
+- `<version>`: Update this to match the `CHANGELOG.md` file as well as the git tag of the release.
+- `<java.target.version>`: This should be updated to match the version of Java you are using. This is used for the JavaDoc generation and many other items.
+- `<jreleaser.*>`: Any tags starting with `jreleaser` are configs that can be configured if needed.
 
 <!-- LICENSE -->
 ## License
@@ -302,23 +304,28 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 * This is an update of the original [jGrade](https://github.com/tkutcher/jgrade).
 * Originally developed by [dscpsyl](https://github.com/dscpsyl) and directed by [pconrad](https://github.com/pconrad)
-* Maintained by the CMPSC 192 course staff and students at University of California, Santa Barbara
+  * Origional fork here: [dscpsyl/jGrade2](https://github.com/dscpsyl/jgrade2)
+* Currently maintained by the CMPSC 192 course staff and students at University of California, Santa Barbara
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Contributors
 
+<a href="https://github.com/jgrade2/jgrade2/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jgrade2/jgrade2" />
+</a>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/dscpsyl/jgrade2.svg?style=for-the-badge
-[contributors-url]: https://github.com/dscpsyl/jgrade2/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/dscpsyl/jgrade2.svg?style=for-the-badge
-[forks-url]: https://github.com/dscpsyl/jgrade2/network/members
-[stars-shield]: https://img.shields.io/github/stars/dscpsyl/jgrade2.svg?style=for-the-badge
-[stars-url]: https://github.com/dscpsyl/jgrade2/stargazers
-[issues-shield]: https://img.shields.io/github/issues/dscpsyl/jgrade2.svg?style=for-the-badge
-[issues-url]: https://github.com/dscpsyl/jgrade2/issues
-[license-shield]: https://img.shields.io/github/license/dscpsyl/jgrade2.svg?style=for-the-badge
-[license-url]: https://github.com/dscpsyl/jgrade2/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/jgrade2/jgrade2.svg?style=for-the-badge
+[contributors-url]: https://github.com/jgrade2/jgrade2/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jgrade2/jgrade2.svg?style=for-the-badge
+[forks-url]: https://github.com/jgrade2/jgrade2/network/members
+[stars-shield]: https://img.shields.io/github/stars/jgrade2/jgrade2.svg?style=for-the-badge
+[stars-url]: https://github.com/jgrade2/jgrade2/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jgrade2/jgrade2.svg?style=for-the-badge
+[issues-url]: https://github.com/jgrade2/jgrade2/issues
+[license-shield]: https://img.shields.io/github/license/jgrade2/jgrade2.svg?style=for-the-badge
+[license-url]: https://github.com/jgrade2/jgrade2/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/davidjsim/

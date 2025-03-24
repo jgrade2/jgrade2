@@ -12,11 +12,12 @@
 _These new formats are from >2.0.0 (alpha-1)_
 
 
-### v2.0.0
+### v2.0.0-a3
 
-#### Added
-
-- Install via Maven Central
+#### Changed
+- Project organization is now `com.github.jgrade2` to match the new Github organization
+- Updated Maven Central release workflow to match the new Central Repository requirements vs the old OSSRH repository.
+- Updated README to reflect the new project location and organization.
 
 ### v2.0.0-a2
 

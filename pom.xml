@@ -33,33 +33,33 @@
         </developer>
     </developers>
 
-    <groupId>io.github.dscpsyl</groupId>
+    <groupId>io.github.jgrade2</groupId>
     <artifactId>jgrade2</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0-a2</version> <!-- NOTE - If major/minor version changes, update project.finalName in properties -->
+    <version>2.0.0-a3</version>
 
     <name>jgrade2</name>
     <inceptionYear>2023</inceptionYear>
-    <url>https://github.com/dscpsyl/jgrade2</url>
-    <description>An update to the original jGrade (based on tkutcher/jgrade) for Java 17 and jUnit 5</description>
+    <url>https://github.com/jgrade2/jgrade2</url>
+    <description>An update to the original jGrade (based on tkutcher/jgrade) for modern Java and JUnit versions</description>
     <!-- Required for Maven Central-->
     <scm>
-        <connection>scm:git:https://github.com/dscpsyl/jgrade2.git</connection>
-        <developerConnection>scm:git:https://github.com/dscpsyl/jgrade2.git</developerConnection>
-        <url>https://github.com/dscpsyl/jgrade2.git</url>
+        <connection>scm:git:https://github.com/jgrade2/jgrade2.git</connection>
+        <developerConnection>scm:git:https://github.com/jgrade2/jgrade2.git</developerConnection>
+        <url>https://github.com/jgrade2/jgrade2.git</url>
         <tag>HEAD</tag>
     </scm>
 
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>https://github.com/dscpsyl/jgrade2/blob/dev/LICENSE.md</url>
+            <url>https://github.com/jgrade2/jgrade2/blob/dev/LICENSE.md</url>
         </license>
     </licenses>
 
     <properties> <!-- NOTE - All dependency, java, and plugin versions should be added/changed here -->
-        <project.finalName>jgrade2-2.0.0-a2</project.finalName>
-        <java.target.version>17</java.target.version>
+        <project.finalName>{$artifactId}-{$version}</project.finalName>
+        <java.target.version>21</java.target.version>
 
         <commons-cli.version>1.5.0</commons-cli.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
@@ -78,7 +78,7 @@
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
 
         <!-- Maven Central release options-->
-        <jreleaser.version>1.9.0</jreleaser.version>
+        <jreleaser.version>1.17.0</jreleaser.version>
         <jreleaser.closeRepository>true</jreleaser.closeRepository>
         <jreleaser.releaseRepository>true</jreleaser.releaseRepository>
         <target.deploy.folder>local::file:./target/staging-deploy</target.deploy.folder>
@@ -185,7 +185,7 @@
                                     <appendAssemblyId>false</appendAssemblyId>
                                     <archive>
                                         <manifest>
-                                            <mainClass>com.github.dscpsyl.jgrade2.JGrade2</mainClass>
+                                            <mainClass>com.github.jgrade2.jgrade2.JGrade2</mainClass>
                                         </manifest>
                                     </archive>
                                 </configuration>
@@ -217,13 +217,13 @@
                         <configuration>
                             <excludes>
                                 <!-- Hard to test for specific failures due to inability to create a TestIdentifier manually-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/gradedtest/GradedTestListener.class</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/gradedtest/GradedTestListener.class</exclude>
                                 <!-- Nothing to do-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/**/DefaultGraderStrategy.*</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/**/DefaultGraderStrategy.*</exclude>
                                 <!-- Mostly private classes and cannot be unit tested-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/**/*CheckstyleGrader.*</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/**/*CheckstyleGrader.*</exclude>
                                 <!-- CLI interface and difficult to unit test-->
-                                <exclude>**/com/github/dscpsyl/jgrade2/**/*CLITester.*</exclude>
+                                <exclude>**/com/github/jgrade2/jgrade2/**/*CLITester.*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
@@ -305,22 +305,22 @@
                             </historyOutputFile>
                             <verbose>true</verbose>
                             <targetClasses>
-                                <param>com.github.dscpsyl.jgrade2.*</param>
+                                <param>com.github.jgrade2.jgrade2.*</param>
                             </targetClasses>
                             <targetTests>
-                                <param>com.github.dscpsyl.jgrade2.*</param>
+                                <param>com.github.jgrade2.jgrade2.*</param>
                             </targetTests>
                             <excludedClasses>
                                 <!--See reason from jacoco test coverage exclusion-->
-                                <param>com.github.dscpsyl.jgrade2.CheckstyleGrader</param>
+                                <param>com.github.jgrade2.jgrade2.CheckstyleGrader</param>
                                 <!--See reason from jacoco test coverage exclusion-->
-                                <param>com.github.dscpsyl.jgrade2.CLITester*</param>
+                                <param>com.github.jgrade2.jgrade2.CLITester*</param>
                             </excludedClasses>
                             <excludedTestClasses></excludedTestClasses>
                             <excludedMethods>
                                 <param>flush_and_close_noPitest</param>
                                 <!--Private constructor-->
-                                <param>com.github.dscpsyl.jgrade2.ReflectGrade.ReflectGrade</param>
+                                <param>com.github.jgrade2.jgrade2.ReflectGrade.ReflectGrade</param>
                             </excludedMethods>
                             <outputFormats>
                                 <outputFormat>HTML</outputFormat>
@@ -393,7 +393,7 @@
                                     <appendAssemblyId>false</appendAssemblyId>
                                     <archive>
                                         <manifest>
-                                            <mainClass>com.github.dscpsyl.jgrade2.JGrade2</mainClass>
+                                            <mainClass>com.github.jgrade2.jgrade2.JGrade2</mainClass>
                                         </manifest>
                                     </archive>
                                 </configuration>
@@ -436,23 +436,21 @@
                         <version>${jreleaser.version}</version>
                         <configuration>
                             <jreleaser>
-                            <signing>
-                                <active>ALWAYS</active>
-                                <armored>true</armored>
-                            </signing>
-                            <deploy>
-                                <maven>
-                                <nexus2>
-                                    <maven-central>
+                                <signing>
                                     <active>ALWAYS</active>
-                                    <url>https://s01.oss.sonatype.org/service/local</url>;
-                                    <closeRepository>${jreleaser.closeRepository}</closeRepository>
-                                    <releaseRepository>${jreleaser.releaseRepository}</releaseRepository>
-                                    <stagingRepositories>target/staging-deploy</stagingRepositories>
-                                    </maven-central>
-                                </nexus2>
-                                </maven>
-                            </deploy>
+                                    <armored>true</armored>
+                                </signing>
+                                <deploy>
+                                    <maven>
+                                        <mavenCentral>
+                                            <sonatype>
+                                                <active>ALWAYS</active>
+                                                <url>https://central.sonatype.com/api/v1/publisher</url>
+                                                <stagingRepositories>target/staging-deploy</stagingRepositories>
+                                            </sonatype>
+                                        </mavenCentral>
+                                    </maven>
+                                </deploy>
                             </jreleaser>
                         </configuration>
                     </plugin>
@@ -491,7 +489,7 @@
                                     <workDirectory>${gh.release.dir}</workDirectory>
                                     <archive>
                                         <manifest>
-                                            <mainClass>com.github.dscpsyl.jgrade2.JGrade2</mainClass>
+                                            <mainClass>com.github.jgrade2.jgrade2.JGrade2</mainClass>
                                         </manifest>
                                     </archive>
                                 </configuration>
