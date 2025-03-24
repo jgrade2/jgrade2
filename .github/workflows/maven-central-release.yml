@@ -16,6 +16,8 @@ jobs:
         with:
           distribution: temurin
           java-version-file: ./res/.java-version
+      - name: Check JRelease Configs
+        run: ./nvmw -Prelease jreleaser:config
       - name: Publish package
         env:
           JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.JRELEASER_MAVENCENTRAL_USERNAME }}
