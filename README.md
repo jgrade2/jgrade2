@@ -275,9 +275,9 @@ This workflow runs whenever a tag commit is pushed onto the `main` branch. It wi
 
 This workflow will run whenever a release is published on Github. It uitilizes [jReleaser](https://github.com/jreleaser/jreleaser) to deploy to Maven Central. There are a few secrets that need to be present in the repo for this to work. 
 
-- `JRELEASER_NEXUS2_USERNAME`: The variable name is legacy but it will work the same. This is the username of your [Sonatype](https://central.sonatype.com/) account.
-- `JRELEASER_NEXUS2_PASSWORD`: The variable name is legacy but it will work the same. The password of your [Sonatype](https://central.sonatype.com/) account.
-- `RELEASER_GPG_PASSPHRASE`: The passphrase of your GPG key. This is used to sign the release.
+- `JRELEASER_MAVENCENTRAL_USERNAME`: The username of your [Sonatype](https://central.sonatype.com/) account.
+- `JRELEASER_MAVENCENTRAL_TOKEN`: This is the User Token associated with the account in `JRELEASER_MAVENCENTRAL_USERNAME`.
+- `JRELEASER_GPG_PASSPHRASE`: The passphrase of your GPG key. This is used to sign the release.
 - `JRELEASER_GPG_SECRET_KEY`: The secret key of your GPG key. This is used to sign the release.
 - `JRELEASER_GPG_PUBLIC_KEY`: The public key of your GPG key. This is used to sign the release.
   
