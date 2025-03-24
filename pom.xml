@@ -36,7 +36,7 @@
     <groupId>io.github.jgrade2</groupId>
     <artifactId>jgrade2</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0-a2</version> <!-- NOTE - If major/minor version changes, update project.finalName in properties -->
+    <version>2.0.0-a3</version>
 
     <name>jgrade2</name>
     <inceptionYear>2023</inceptionYear>
@@ -58,7 +58,7 @@
     </licenses>
 
     <properties> <!-- NOTE - All dependency, java, and plugin versions should be added/changed here -->
-        <project.finalName>jgrade2-2.0.0-a2</project.finalName>
+        <project.finalName>{$artifactId}-{$version}</project.finalName>
         <java.target.version>21</java.target.version>
 
         <commons-cli.version>1.5.0</commons-cli.version>
@@ -78,7 +78,7 @@
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
 
         <!-- Maven Central release options-->
-        <jreleaser.version>1.9.0</jreleaser.version>
+        <jreleaser.version>1.17.0</jreleaser.version>
         <jreleaser.closeRepository>true</jreleaser.closeRepository>
         <jreleaser.releaseRepository>true</jreleaser.releaseRepository>
         <target.deploy.folder>local::file:./target/staging-deploy</target.deploy.folder>
@@ -436,23 +436,21 @@
                         <version>${jreleaser.version}</version>
                         <configuration>
                             <jreleaser>
-                            <signing>
-                                <active>ALWAYS</active>
-                                <armored>true</armored>
-                            </signing>
-                            <deploy>
-                                <maven>
-                                <nexus2>
-                                    <maven-central>
+                                <signing>
                                     <active>ALWAYS</active>
-                                    <url>https://s01.oss.sonatype.org/service/local</url>;
-                                    <closeRepository>${jreleaser.closeRepository}</closeRepository>
-                                    <releaseRepository>${jreleaser.releaseRepository}</releaseRepository>
-                                    <stagingRepositories>target/staging-deploy</stagingRepositories>
-                                    </maven-central>
-                                </nexus2>
-                                </maven>
-                            </deploy>
+                                    <armored>true</armored>
+                                </signing>
+                                <deploy>
+                                    <maven>
+                                        <mavenCentral>
+                                            <sonatype>
+                                                <active>ALWAYS</active>
+                                                <url>https://central.sonatype.com/api/v1/publisher</url>
+                                                <stagingRepositories>target/staging-deploy</stagingRepositories>
+                                            </sonatype>
+                                        </mavenCentral>
+                                    </maven>
+                                </deploy>
                             </jreleaser>
                         </configuration>
                     </plugin>
