@@ -14,6 +14,10 @@ _These new formats are from >2.0.0 (alpha-1)_
 
 ### v2.0.0-a3
 
+#### Fixed
+- Deadlock in `CLITester` when executing processes with large output (e.g. Checkstyle).
+- Various spelling and grammatical errors in `README.md`
+
 #### Changed
 - Project organization is now `com.github.jgrade2` to match the new Github organization
 - Updated Maven Central release workflow to match the new Central Repository requirements vs the old OSSRH repository.
