@@ -5,11 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -209,25 +211,36 @@ public abstract class CLITester {
                                            String toWriteIn) {
         try {
             Process proc = builder.start();
-            OutputStream driverStdin = proc.getOutputStream();
-            InputStream driverStdout = proc.getInputStream();
-            InputStream driverStderr = proc.getErrorStream();
 
-            // FIXME - Is there a fancier way to do this?
+            CompletableFuture<String> stdoutFuture = CompletableFuture.supplyAsync(() -> {
+                try {
+                    return getStringFromStream(proc.getInputStream());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            CompletableFuture<String> stderrFuture = CompletableFuture.supplyAsync(() -> {
+                try {
+                    return getStringFromStream(proc.getErrorStream());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
             if (toWriteIn != null) {
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(driverStdin));
-                writer.write(toWriteIn);
-                writer.flush();
-                writer.close();
+                try (BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(proc.getOutputStream()))) {
+                    writer.write(toWriteIn);
+                    writer.flush();
+                }
             }
 
             int exitValue = proc.waitFor();
 
-            return new ExecutionResult(getStringFromStream(driverStdout),
-                    getStringFromStream(driverStderr), exitValue);
+            return new ExecutionResult(stdoutFuture.get(), stderrFuture.get(), exitValue);
 
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException | ExecutionException e) {
             throw new InternalError(e);
         }
     }
@@ -250,8 +263,6 @@ public abstract class CLITester {
      * @throws IOException If there is an error reading from the stream.
      */
     private static String getStringFromStream(InputStream stream) throws IOException {
-        byte[] streamBytes = new byte[stream.available()];
-        stream.read(streamBytes, 0, streamBytes.length);
-        return new String(streamBytes);
+        return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
     }
 }
