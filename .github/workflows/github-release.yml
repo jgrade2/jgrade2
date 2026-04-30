@@ -10,7 +10,9 @@ jobs:
   upload-release:
     name: Build and Upload Release
     runs-on: ubuntu-latest
-    if: contains(${{ github.event.base_ref }}, 'main')
+    permissions:
+      contents: write
+    if: contains(github.event.base_ref, 'main')
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3.5.2
