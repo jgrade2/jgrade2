@@ -39,7 +39,7 @@
 This is an update to the original jGrade, now supporting Java21 and [JUnit5](https://junit.org/junit5/). This provides four 
 annotations: `@Grade` (+ `@BeforeGrading` and `@AfterGrading`) and `@GradedTest`, each meant to help autograde 
 student assignments in Java for the Gradescope autograder. When correctly setup, instructors can 
-simply use JUnit5 to write tests for assignemnts. This library will automatically capture results, 
+simply use JUnit5 to write tests for assignments. This library will automatically capture results, 
 and output the correct json format for Gradescope to read.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -78,16 +78,16 @@ There are two ways to install jGrade2.
 
 ## Usage
 
-Usage is nearly identical to the origional [jGrade](https://github.com/tkutcher/jgrade). jGrade2 comes with a commandline
+Usage is nearly identical to the original [jGrade](https://github.com/tkutcher/jgrade). jGrade2 comes with a command line
 to run the grader manually. This is useful for debugging and testing. After compiling, you can use
 
 ```java -jar jGrade2.jar -h```
 
-for help and options of the commandline. However, a typical usage would be
+for help and options of the command line. However, a typical usage would be
 
 ```java -jar jGrade2.jar -c ExampleGrading -o results.json```
 
-### Test Writting and Grading
+### Test Writing and Grading
 
 You can take a look at the gradescope example in `examples/gradescope` for a full example.
 
@@ -127,7 +127,7 @@ public class ExampleTest {
 ```
 
 The `@GradedTest` annotation has the following parameters:
-- `name` - The name of the test. This will be displayed in the Gradescope interface. DEFAUT: "Unnamed test"
+- `name` - The name of the test. This will be displayed in the Gradescope interface. DEFAULT: "Unnamed test"
 - `number` - The test number in a string. This will be displayed in the Gradescope interface. DEFAULT: ""
 - `points` - The number of points this test is worth. DEFAULT: 1.0
 - `visibility` - The visibility of the test. This can be either VISIBLE or HIDDEN. DEFAULT: VISIBLE
@@ -199,7 +199,7 @@ The `lib/` folder contains all jars and library files needed to run your test - 
 
  `test_submissions/` are submissions to test with on Gradescope. These are precompiled for you to test with the grader that is included in the example.
 
- The source has 2 main packages, `staff` and `student`. The staff package contains the unit tests, a solution (to debug with) and the code to do the grading. The student package contains studnet skeleton code for studnets to fill in.
+ The source has 2 main packages, `staff` and `student`. The staff package contains the unit tests, a solution (to debug with) and the code to do the grading. The student package contains student skeleton code for students to fill in.
 
  While debugging, a makefile is provided for compiling and running. `make output` will start fresh and run the autograder, pretty-printing the output to the console.
 
@@ -237,9 +237,9 @@ Contributions are what make the open source community such an amazing place to l
 
 The repository is structured like so:
 - `main & master` The main branches for publishing to maven central. These should be kept clean and only update with releases. It is also protected and can only be added to via a pull request.
-- `dev` The development branch. This is where all development should be done and contains pe-releases. It is protected and can only be added to via a pull request.
+- `dev` The development branch. This is where all development should be done and contains pre-releases. It is protected and can only be added to via a pull request.
 
-Other branches are for personal developnment and should only be pulled to the `dev` branch. Once a release is determined, then a pull request can be made to `main` or `master`.
+Other branches are for personal development and should only be pulled to the `dev` branch. Once a release is determined, then a pull request can be made to `main` or `master`.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
@@ -262,18 +262,18 @@ This workflow will run when a pull request is opened and when a push is made to 
 
 #### JavaDoc
 
-This workflow runs whenever a push is made to the `main` branch. It will build the javadoc and push it to the `javadoc` branch. This will update the javadoc on the [github pages](https://jgrade2.github.io/jgrade2/javadoc/). It uitilizes the native javadoc extension.
+This workflow runs whenever a push is made to the `main` branch. It will build the javadoc and push it to the `javadoc` branch. This will update the javadoc on the [github pages](https://jgrade2.github.io/jgrade2/javadoc/). It utilizes the native javadoc extension.
 
 #### Github Release
 
 This workflow runs whenever a tag commit is pushed onto the `main` branch. It will create and publish a new release based on the compiled jar file. This is based on the `gh_release` profile in `pom.xml`. Please see the `pom.xml` file for more information.
 
-*A note on this specific workflow:* There is no currently known way of easily getting both the ref tag and the ref branch name in a single workflow from the Github context. Depending on how the worflow is triggered, either the tag or the branch name will be used. Thus, the way branch and tag information is checked could break or be irrevelant at any time.
+*A note on this specific workflow:* There is no currently known way of easily getting both the ref tag and the ref branch name in a single workflow from the Github context. Depending on how the workflow is triggered, either the tag or the branch name will be used. Thus, the way branch and tag information is checked could break or be irrelevant at any time.
 
 
 #### Maven Release
 
-This workflow will run whenever a release is published on Github. It uitilizes [jReleaser](https://github.com/jreleaser/jreleaser) to deploy to Maven Central. There are a few secrets that need to be present in the repo for this to work. 
+This workflow will run whenever a release is published on Github. It utilizes [jReleaser](https://github.com/jreleaser/jreleaser) to deploy to Maven Central. There are a few secrets that need to be present in the repo for this to work. 
 
 - `JRELEASER_MAVENCENTRAL_USERNAME`: The username of your [Sonatype](https://central.sonatype.com/) account.
 - `JRELEASER_MAVENCENTRAL_TOKEN`: This is the User Token associated with the account in `JRELEASER_MAVENCENTRAL_USERNAME`.
@@ -304,7 +304,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 * This is an update of the original [jGrade](https://github.com/tkutcher/jgrade).
 * Originally developed by [dscpsyl](https://github.com/dscpsyl) and directed by [pconrad](https://github.com/pconrad)
-  * Origional fork here: [dscpsyl/jGrade2](https://github.com/dscpsyl/jgrade2)
+  * Original fork here: [dscpsyl/jGrade2](https://github.com/dscpsyl/jgrade2)
 * Currently maintained by the CMPSC 192 course staff and students at University of California, Santa Barbara
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
